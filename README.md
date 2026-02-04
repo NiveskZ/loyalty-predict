@@ -119,7 +119,7 @@ Uma segunda dimensão é a recência — quantos dias se passaram desde a últim
 
 - Quem não aparece depois de 28 dias pode ser classificado como “**desencantado**”.
 
-- Se não houver retorno depois disso, é o nosso “**zumbi**” (churn).
+- Se não houver retorno depois disso é o nosso “**zumbi**” (churn).
 
 Também há casos de retorno:
 
@@ -143,7 +143,7 @@ graph LR
     Curiosa --> Zumbi
 
     %% O Ciclo de Oscilação (O dia a dia)
-    Fiel -->|15 dias off| Turista
+    Fiel -->|14 dias off| Turista
     Turista -->|Interagiu| Fiel
 
     %% O Caminho do Churn
