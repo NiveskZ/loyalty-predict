@@ -139,8 +139,6 @@ graph LR
     Inicio((Novo Cadastro)) --> Curiosa
     Curiosa --> Fiel
     Curiosa --> Turista
-    Curiosa --> Desencantado
-    Curiosa --> Zumbi
 
     %% O Ciclo de Oscilação (O dia a dia)
     Fiel -->|14 dias off| Turista
@@ -151,7 +149,17 @@ graph LR
     Desencantado -->|+ Tempo| Zumbi
 
     %% O Ciclo de Retorno (Reativação)
-    Desencantado -->|Reconquistada| Fiel
-    Zumbi -->|Reborn| Fiel
+    Desencantado --> Reconquistada
+    Reconquistada --> Fiel
+    Zumbi --> Reborn
+    Reborn --> Fiel
 ```
 
+## RFV (Recência, Frequência e Valor )
+Acabamos de ver a Recência, porém ela sozinha não diz muito, se considerarmos uma pessoa que apenas diz um "Bom dia" e se mantém fiel dentro da nossa métrica e compararmos com uma pessoa que ganha pontos, conversa no chat, interage mais vezes e tambem se mantém fiel temos dois perfis bem diferentes. Nesse momento que entra o "F" de Frequência e o "V" de Valor.
+
+### Frequência
+Duas possibilidades de calcular frequência seriam:
+- Contar a quantidade de dias de um determinado usuário;
+- Contar a quantidade de transações.
+No nosso caso, a quantidade de dias parece mais interessante, pois é mais importante a pessoa estar presente.
