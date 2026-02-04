@@ -1,28 +1,27 @@
 # Loyalty Predict
 
-Construindo uma solução de Data Science junto com a comunidade! Confira todo nosso material em [cursos.teomewhy.org](cursos.teomewhy.org).
+Construindo uma solução de Data Science junto com a comunidade do Téo Me Why!
 
+Você pode conferir todo o material que ele oferece gratuitamente em [cursos.teomewhy.org](cursos.teomewhy.org).
+
+Aqui Nesse README estarão minhas anotações do projeto e o que eu achar pertinente, você pode conferir o repositório do Téo [Loyalty Predict](https://github.com/TeoMeWhy/loyalty-predict)
 <img src="img/loyalty_predict_canva.png">
 
-Começamos ao vivo dia 29/09 às 9AM na [twitch.tv/teomewhy](https://twitch.tv/teomewhy) - [🔗 deixe na sua agenda!!](https://calendar.google.com/calendar/event?action=TEMPLATE&tmeid=M2w1YnB1OTk0bTUxdHZvMnNpbmZxZTlwOGpfMjAyNTA5MjlUMTIwMDAwWiB0ZW9AdGVvbWV3aHkub3Jn&tmsrc=teo%40teomewhy.org&scp=ALL)
-
-
-# Índice
+## Índice
 
 - [Objetivo](#objetivo)
 - [Ações](#ações)
 - [Pré Requisitos](#pré-requisitos)
-- [Etapas](#etapas)
 - [Fonte de Dados](#fontes-de-dados)
 - [Como nos apoiar](#apoie-o-nosso-trabalho)
 - [Perguntas Frequentes](#perguntas-frequentes)
 
 
-## Objetivo
+### Objetivo
 
 Identificar perda ou ganho de engajamento dos usuários da nossa comunidade.
 
-## Ações
+### Ações
 
 - Métricas gerais do TMW;
 - Definição do Ciclo de Vida dos usuários;
@@ -30,9 +29,9 @@ Identificar perda ou ganho de engajamento dos usuários da nossa comunidade.
 - Criar modelo de Machine Learning que detecte a perda ou ganho de engajamento;
 - Incentivo por meio de pontos para usuários mais engajados;
 
-## Pré Requisitos
+### Pré Requisitos
 
-Confira as ferramentas necessárias para estar confortável em acompanhar o projeto. Você pode aprender todas elas em nosso YouTube de maneira 100% gratuita:
+Ferramentas necessárias para estar confortável em acompanhar o projeto. Você pode aprender todas elas no canal do Téo de maneira 100% gratuita:
 
 - [SQL](https://www.youtube.com/playlist?list=PLvlkVRRKOYFRo651oD0JptVqfQGDvMi3j)
 - [Python](https://www.youtube.com/playlist?list=PLvlkVRRKOYFSpRkqnR0p2A-eaVlpLnN3D)
@@ -41,9 +40,24 @@ Confira as ferramentas necessárias para estar confortável em acompanhar o proj
 - [Machine Learning](https://www.youtube.com/playlist?list=PLvlkVRRKOYFR6_LmNcJliicNan2TYeFO2)
 - [Git e GitHub](https://www.youtube.com/playlist?list=PLvlkVRRKOYFQyKmdrassLNxkzSMM6tcSL)
 
-## Etapas
+### Fontes de Dados
 
-- Entendimento do negócio;
+- [Sistema de Pontos](https://www.kaggle.com/datasets/teocalvo/teomewhy-loyalty-system)
+- [Plataforma de Cursos](https://www.kaggle.com/datasets/teocalvo/teomewhy-education-platform)
+
+### Apoie o trabalho do Téo
+
+Abaixo deixo os links de acesso para o canal do youtube e da twitch do Téo, caso tenha caido aqui de paraquedas e se interessou, 
+recomendo fortemente visitá-los uma vez que ele sempre está produzindo conteúdos de alta qualidade e gratuitos.
+
+Se possível considere apoiá-lo. Você terá acesso a outras formas de apoio em https://cursos.teomewhy.org/ no final da página.
+
+- 🎥 Membro no YouTube: [youtube.com/@teomewhy/membership](https://youtube.com/@teomewhy/membership)
+- 🎮 Sub na Twitch: [twitch.tv/teomewhy](https://twitch.tv/teomewhy)
+
+## Índice Etapas
+
+- [Entendimento do negócio](#entendimento-do-negócio);
 - Extração dos dados;
 - Entendimento dos dados;
 - Definição das variáveis;
@@ -53,36 +67,40 @@ Confira as ferramentas necessárias para estar confortável em acompanhar o proj
 - Criação de App para Inferência em Tempo Real;
 - Integração com Ecossistema TMW;
 
-## Fontes de Dados
+# Entendimento do negócio
 
-- [Sistema de Pontos](https://www.kaggle.com/datasets/teocalvo/teomewhy-loyalty-system)
-- [Plataforma de Cursos](https://www.kaggle.com/datasets/teocalvo/teomewhy-education-platform)
+## Sistema de pontos no chat da Twitch - Cubos
+- !join para se cadastrar;
+- !presente para assinar a lista de presença e ganhar cubos;
+- Cada mensagem enviada no chat, recompensa 1 cubo;
+- !troca realiza a troca de cubos por datapoints, moeda da loja no StreamElements.
 
-## Apoie o nosso trabalho
+Através dessas transações que é feita a identificação de atividade das pessoas, essa será a nossa referência.
 
-- 💵 Chave Pix: pix@teomewhy.org
-- 💶 LivePix: [livepix.gg/teomewhy](https://livepix.gg/teomewhy)
-- 💷 GitHub Sponsors: [github.com/sponsors/TeoMeWhy](https://github.com/sponsors/TeoMeWhy)
-- 💴 ApoiaSe: [apoia.se/teomewhy](https://apoia.se/teomewhy)
-- 🎥 Membro no YouTube: [youtube.com/@teomewhy/membership](https://youtube.com/@teomewhy/membership)
-- 🎮 Sub na Twitch: [twitch.tv/teomewhy](https://twitch.tv/teomewhy)
-- 💌 Newsletter: [teomewhy.substack.com](https://teomewhy.substack.com)
-- 📚 Lojinha na Amazon: [Clique Aqui](https://www.amazon.com.br/shop/teo.calvo?-ref_=cm_sw_r_cp_ud_aipsfshop_MS3WV3HX76NT92FNB5BC)
+Dessa forma conseguimos construir nosso CRM e saber quem é o público que está voltando.
 
-## Perguntas Frequentes
+Ou seja, a fonte de verdade do projeto está em [loyalty-system](data\loyalty-system)
 
-> [!IMPORTANT]
-> As lives são gratuitas e abertas ao público. Basta acessar o canal [twitch.tv/teomewhy](https://twitch.tv/teomewhy) no horário e assistir.
+## Plataforma de Cursos
+- Todo catálogo de cursos e projetos que estão disponíveis no Youtube;
+- A pessoa salva a progressão complentando vídeos;
+- É possível preencher os dados de PDI que também ficam salvos;
+- Há recompensas e integração com o sistema de pontos anterior.
 
-> [!CAUTION]
-> Não daremos certificado!
+Pessoas que só acessam a plataforma e o Youtube não são considerados dentro do ecossistema.
 
-> [!TIP]
-> O VOD da Twitch ficará disponível logo após a transmissão para os Subs, durante 16 dias (política da Twitch).
-> No mesmo dia da respectiva transmissão, cortes editados estarão disponíveis exclusivamente para [membros do YouTube](https://www.youtube.com/channel/UC-Xa9J9-B4jBOoBNIHkMMKA/join).
+Só são considerados usuários ativos quem esta ativamente dentro do Sistema de pontos da Twitch.
 
-> [!NOTE]
-> Iniciaremos às 9AM e a previsão é finalizar a transmissão as 11AM.
+## O que estamos procurando?
+A partir do entendimento do negócio, precisamos também entender o que queremos responder.
 
-> [!NOTE]
-> As lives serão de segunda a sexta. Havendo necessidade de avançar por mais de uma semana, seguiremos realizando transmissões.
+Nosso objetivo inicialmente vai ser obter respostas para as seguintes perguntas:
+
+- O que está acontecendo com engajamento das pessoas?
+- Como estão as métricas gerais?
+- O que podemos fazer para melhorá-las?
+
+Aqui vamos utilizar algumas métricas:
+ 
+DAU (Usuário Ativo Diário)
+MAU (Usuário Ativo Mensal)
