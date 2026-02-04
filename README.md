@@ -104,3 +104,54 @@ Aqui vamos utilizar algumas métricas:
  
 DAU (Usuário Ativo Diário)
 MAU (Usuário Ativo Mensal)
+
+## O Ciclo de vida
+Vamos tentar entender todas as possibilidades de comportamento do usuário
+em relação ao consumo do produto.
+
+O caso mais óbvio é o cliente que acabou de chegar. Se considerarmos a idade base (tempo desde o primeiro cadastro), podemos qualificar alguém como “novo”. Pensando num curso com duração mínima de uma semana, podemos chamar quem está na base por até 7 dias de “curioso”. Após esse período, a pessoa pode entrar em outras classificações.
+
+Uma segunda dimensão é a recência — quantos dias se passaram desde a última interação do usuário. Por exemplo:
+
+- Quem interage ao menos uma vez por semana pode ser classificado como “**fiel**”.
+
+- Quem não interage há 15 dias podemos chamar de “**turista**”.
+
+- Quem não aparece depois de 28 dias pode ser classificado como “**desencantado**”.
+
+- Se não houver retorno depois disso, é o nosso “**zumbi**” (churn).
+
+Também há casos de retorno:
+
+- Um **desencantado** que volta a consumir antes de virar zumbi chamamos de “reconquistada”.
+
+- Alguém que já era zumbi e volta chamamos de “**reborn**”.
+
+Esses nomes são rótulos úteis para entender comportamentos, mas são arbitrários: ajuste os limiares e nomes conforme fizer mais sentido para o seu produto.
+
+Note que esses nomes são apenas uma forma de identificar e tentar entender o fenômeno e é uma métrica arbitrária, podendo ser modificado de maneira que mais faça sentido a depender do caso.
+
+O diagrama abaixo tenta ilustrar um pouco esse ciclo de vida.
+
+```mermaid 
+graph LR
+    %% Entrada
+    Inicio((Novo Cadastro)) --> Curiosa
+    Curiosa --> Fiel
+    Curiosa --> Turista
+    Curiosa --> Desencantado
+    Curiosa --> Zumbi
+
+    %% O Ciclo de Oscilação (O dia a dia)
+    Fiel -->|15 dias off| Turista
+    Turista -->|Interagiu| Fiel
+
+    %% O Caminho do Churn
+    Turista -->|28 dias off| Desencantado
+    Desencantado -->|+ Tempo| Zumbi
+
+    %% O Ciclo de Retorno (Reativação)
+    Desencantado -->|Reconquistada| Fiel
+    Zumbi -->|Reborn| Fiel
+```
+
