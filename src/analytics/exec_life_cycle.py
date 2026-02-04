@@ -24,8 +24,11 @@ dates = [
 # %%
 for i in dates:
     with engine_analytical.connect() as conn:
-        conn.execute(sqlalchemy.text(f"DELETE FROM life_cycle WHERE dtRef = date('{i}', '-1 day') OR dtRef IS null"))
-        conn.commit()
+        try:
+            conn.execute(sqlalchemy.text(f"DELETE FROM life_cycle WHERE dtRef = date('{i}', '-1 day') OR dtRef IS null"))
+            conn.commit()
+        except Exception as err:
+            print(err)
 
     print(i)
     query_format = query.format(date=i)
