@@ -1,4 +1,7 @@
 # %%
+import datetime
+from tqdm import tqdm
+
 import pandas as pd
 import sqlalchemy
 
@@ -15,14 +18,21 @@ print(query)
 engine_app = sqlalchemy.create_engine("sqlite:///data/loyalty-system/database.db")
 engine_analytical = sqlalchemy.create_engine("sqlite:///data/analytics/database.db")
 # %%
-dates = [
-    '2025-10-01',
-    '2025-11-01',
-    '2025-12-01',
-    '2026-01-01',
-]
+
+def date_range(start, stop):
+
+    dates = []
+    while start <= stop:
+        dates.append(start)
+        dt_start = datetime.datetime.strptime(start, '%Y-%m-%d') + datetime.timedelta(days=1)
+        start = datetime.datetime.strftime(dt_start, '%Y-%m-%d')
+    return dates
+
+dates = date_range('2025-10-01','2026-02-05')
+
+dates
 # %%
-for i in dates:
+for i in tqdm(dates):
     with engine_analytical.connect() as conn:
         try:
             conn.execute(sqlalchemy.text(f"DELETE FROM life_cycle WHERE dtRef = date('{i}', '-1 day') OR dtRef IS null"))
