@@ -6,7 +6,7 @@ WITH tb_life_cycle_atual AS (
 
     FROM life_cycle
 
-    WHERE dtRef = date('2026-02-05', '-1 day')
+    WHERE dtRef = date('{date}', '-1 day')
 ),
 
 tb_life_cycle_D28 AS (
@@ -16,7 +16,7 @@ tb_life_cycle_D28 AS (
 
     FROM life_cycle
 
-    WHERE dtRef = date('2026-02-05', '-29 day')
+    WHERE dtRef = date('{date}', '-29 day')
 
 ),
 
@@ -33,7 +33,7 @@ SELECT IdCliente,
 
 FROM life_cycle
 
-WHERE dtRef < '2026-02-04'
+WHERE dtRef < '{date}'
 
 GROUP BY IdCliente
 ),
@@ -74,6 +74,6 @@ tb_join AS (
     ON t1.descLifeCycleAtual = t4.descLifeCycleAtual
 )
 
-SELECT date('2026-02-05', '-1 day') AS dtRef,
+SELECT date('{date}', '-1 day') AS dtRef,
         *
 FROM tb_join
