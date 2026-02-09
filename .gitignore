@@ -1,2 +1,14 @@
+# env
+.env
+kaggle.json
+.venv
+
+# data
 *.csv
 *.db
+
+# cache e artefatos
+mlartifacts
+mlruns
+__pycache__
+*.pkl
