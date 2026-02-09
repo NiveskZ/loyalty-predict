@@ -3,7 +3,7 @@ import pandas as pd
 import sqlalchemy
 
 from feature_engine import encoding, selection, imputation
-from sklearn import model_selection
+from sklearn import model_selection, tree
 
 pd.set_option('display.max_rows',None)
 # %%
@@ -11,7 +11,7 @@ conn = sqlalchemy.create_engine("sqlite:///data/analytics/database.db")
 # %%
 # SAMPLE - Import dos dados
 
-df = pd.read_sql("abt_fiel", conn)
+df = pd.read_sql("select * from abt_fiel", conn)
 df.head()
 
 # %%
@@ -108,4 +108,77 @@ X_train_transform = onehot.fit_transform(X_train_transform)
 
 # %%
 X_train_transform.head()
+# %%
+# MODEL
+from sklearn import ensemble
+
+X_train_transform = X_train_transform.rename(str,axis="columns") 
+
+#model = tree.DecisionTreeClassifier(random_state=42,
+#                                    min_samples_leaf=50)
+model = ensemble.RandomForestClassifier(random_state=42,
+                                        n_estimators=150,
+                                        n_jobs=1,
+                                        min_samples_leaf=60)
+model.fit(X_train_transform, y_train)
+
+# %%
+# ASSESS
+
+from sklearn import metrics
+
+y_pred_train = model.predict(X_train_transform)
+y_proba_train = model.predict_proba(X_train_transform)
+
+acc_train = metrics.accuracy_score(y_train, y_pred_train)
+auc_train = metrics.roc_auc_score(y_train, y_proba_train[:,1])
+print("Acurácia Treino:", acc_train)
+print("AUC Treino:", auc_train)
+# %%
+X_test_transform = drop_features.transform(X_test)
+X_test_transform = imput_0.transform(X_test_transform)
+X_test_transform = imput_new.transform(X_test_transform)
+X_test_transform = imput_1000.transform(X_test_transform)
+X_test_transform = onehot.transform(X_test_transform)
+
+y_pred_test = model.predict(X_test_transform)
+y_proba_test = model.predict_proba(X_test_transform)
+
+acc_test = metrics.accuracy_score(y_test, y_pred_test)
+auc_test = metrics.roc_auc_score(y_test, y_proba_test[:,1])
+print("Acurácia Teste:", acc_test)
+print("AUC Teste:", auc_test)
+
+# %%
+# BASELINE
+
+y_pred_base = pd.Series([0]* y_test.shape[0])
+y_proba_base = pd.Series([y_train.mean()]*y_test.shape[0])
+
+acc_base = metrics.accuracy_score(y_test, y_pred_base)
+auc_base = metrics.roc_auc_score(y_test, y_proba_base)
+print("Acurácia Baseline:", acc_base)
+print("AUC Baseline:", auc_base)
+# %%
+features_names = X_train_transform.columns.tolist()
+
+feature_importance = pd.Series(model.feature_importances_, index=features_names)
+feature_importance.sort_values(ascending=False)
+# %%
+X_oot = df_oot[features]
+y_oot = df_oot[target]
+
+X_oot_transform = drop_features.transform(X_oot)
+X_oot_transform = imput_0.transform(X_oot_transform)
+X_oot_transform = imput_new.transform(X_oot_transform)
+X_oot_transform = imput_1000.transform(X_oot_transform)
+X_oot_transform = onehot.transform(X_oot_transform)
+
+y_pred_oot = model.predict(X_oot_transform)
+y_proba_oot = model.predict_proba(X_oot_transform)
+
+acc_oot = metrics.accuracy_score(y_oot, y_pred_oot)
+auc_oot = metrics.roc_auc_score(y_oot, y_proba_oot[:,1])
+print("Acurácia OOT:", acc_oot)
+print("AUC OOT:", auc_oot)
 # %%
