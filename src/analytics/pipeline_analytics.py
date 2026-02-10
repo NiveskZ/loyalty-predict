@@ -12,7 +12,8 @@ steps = [
         "db_target":"analytics",
         "dt_start":now,
         "dt_stop":now,
-        "monthly":False
+        "monthly":False,
+        "mode":"append",
     },
     {
         "table":"fs_transacional",
@@ -20,7 +21,8 @@ steps = [
         "db_target":"analytics",
         "dt_start":now,
         "dt_stop":now,
-        "monthly":False
+        "monthly":False,
+        "mode":"append",
     },
     {
         "table":"fs_education",
@@ -28,7 +30,8 @@ steps = [
         "db_target":"analytics",
         "dt_start":now,
         "dt_stop":now,
-        "monthly":False
+        "monthly":False,
+        "mode":"append",
     },
     {
         "table":"fs_life_cycle",
@@ -36,7 +39,8 @@ steps = [
         "db_target":"analytics",
         "dt_start":now,
         "dt_stop":now,
-        "monthly":False
+        "monthly":False,
+        "mode":"append",
     },
     {
         "table":"fs_all",
@@ -44,7 +48,8 @@ steps = [
         "db_target":"analytics",
         "dt_start":now,
         "dt_stop":now,
-        "monthly":False
+        "monthly":False,
+        "mode":"replace",
     }
 ]
 

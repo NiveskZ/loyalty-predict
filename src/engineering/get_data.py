@@ -1,13 +1,12 @@
 # %%
 import os
 import dotenv
-
-from kaggle import api
-
 dotenv.load_dotenv('../../.env')
 
 os.environ['KAGGLE_USERNAME'] = 'username'
 os.environ['KAGGLE_KEY'] = 'key'
+
+from kaggle import api
 # %%
 datasets = [
     'teocalvo/teomewhy-loyalty-system',
