@@ -106,24 +106,34 @@ onehot = encoding.OneHotEncoder(variables=cat_features)
 
 # %%
 # MODEL
-
-#model = tree.DecisionTreeClassifier(random_state=42,
-#                                    min_samples_leaf=50)
-model = ensemble.RandomForestClassifier(random_state=42,
-                                        n_estimators=150,
-                                        n_jobs=1,
-                                        min_samples_leaf=60)
+model = ensemble.AdaBoostClassifier(random_state=42)
 # %%
 # Criando PIPELINE
+params = {
+    "n_estimators": [100,200,400,500,1000],
+    "learning_rate": [0.01,0.05,0.1,0.2,0.3]
+}
+
+grid = model_selection.GridSearchCV(
+    model,
+    param_grid=params,
+    cv=3,
+    scoring='roc_auc',
+    refit=True,
+    verbose=3,
+    n_jobs=5
+)
+
 model_pipeline = pipeline.Pipeline(steps=[
     ('Remoção de Features', drop_features),
     ('Imputação de Zeros',imput_0),
     ('Imputação de Nao-Usuario', imput_new),
     ('Imputação de 1000', imput_1000),
     ('OneHotEncoding', onehot),
-    ('Algoritmo', model)
+    ('Algoritmo', grid)
 ])
 
+# %%
 with mlflow.start_run() as r:
 
     mlflow.sklearn.autolog()
