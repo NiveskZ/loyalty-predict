@@ -121,7 +121,7 @@ grid = model_selection.GridSearchCV(
     scoring='roc_auc',
     refit=True,
     verbose=3,
-    n_jobs=5
+    n_jobs=1
 )
 
 model_pipeline = pipeline.Pipeline(steps=[
